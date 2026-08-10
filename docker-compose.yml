@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  monitoring:
+    build: .
+    container_name: langsmith-agent-monitoring
+    environment:
+      - LANGSMITH_API_KEY=${LANGSMITH_API_KEY}
+      - LANGSMITH_PROJECT=${LANGSMITH_PROJECT}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - MONITORING_INTERVAL=${MONITORING_INTERVAL:-300}
+      - ENVIRONMENT=${ENVIRONMENT:-production}
+      - DEBUG=${DEBUG:-false}
+    restart: unless-stopped
+    logs:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  agent:
+    build: .
+    container_name: langsmith-agent
+    environment:
+      - LANGSMITH_API_KEY=${LANGSMITH_API_KEY}
+      - LANGSMITH_PROJECT=${LANGSMITH_PROJECT}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ENVIRONMENT=${ENVIRONMENT:-production}
+    restart: unless-stopped
+    command: python -m examples.basic_agent
+    depends_on:
+      - monitoring
+
+volumes:
+  logs:
