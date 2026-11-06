@@ -350,7 +350,7 @@ For questions or issues:
 
 ## See Also
 
-- Blog Post: [Using LangSmith Studio for Agent Evaluation and Monitoring](https://test.trpevski.com)
+- Blog Post: [Using LangSmith Studio for Agent Evaluation and Monitoring](https://trpevski.com/blog/langsmith-studio-agent-evaluation-and-monitoring)
 - LangSmith Docs: https://docs.langchain.com/langsmith
 - LangChain Docs: https://docs.langchain.com
 # LangSmith-Agent-Evaluation-and-Monitoring
